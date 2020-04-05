@@ -1,0 +1,58 @@
+#!/bin/sh 
+
+## List things that I need to do
+# TODO: Init Submodules 
+# TODO: Install Brew 
+# TODO: Brew Install :) 
+# TODO: Update python 
+# TODO: Configure jenv
+# TODO: 
+
+
+
+system_type=$(uname -s)
+
+if [ "$system_type" = "Darwin" ]; then
+
+  # Make zsh default shell
+  if [[ ! "$SHELL" =~ "zsh" && -f /etc/shells ]]; then
+    if $(grep -q "/bin/zsh" /etc/shells); then
+      echo "Setting /bin/zsh as your default shell"
+      chsh -s /bin/zsh
+    else 
+      echo "ZSH already set"
+    fi
+  fi 
+
+  # Install homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  # Install the things in the .Brewfile
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating homebrew bundle"
+    brew bundle --global
+  fi
+
+  # Install any fonts
+  echo "Installing fonts to $HOME/Library/Fonts"
+  cp -vf $HOME/.config/yadm/fonts/*.ttf $HOME/Library/Fonts
+
+  # Set-up iterm2 stuff
+  if [ -d "$HOME/.iterm2" ]; then
+    echo "Setting iTerm preference folder to $HOME/.iterm2"
+    defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/.iterm2"
+  fi
+
+  # Update pip
+  if command -v pip3 > /dev/null 2>&1; then
+    echo "Updating PIP Packages"
+    pip3 install --upgrade pip setuptools wheel
+  fi
+
+  # Do brew cleanup
+  brew cleanup
+
+fi
