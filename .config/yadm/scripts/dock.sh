@@ -17,7 +17,7 @@ if [ -d /Applications/iTerm.app ]; then
 fi
 
 # Add Slack to Dock
-if [ -d /Application/Slack.app ]; then
+if [ -d /Applications/Slack.app ]; then
     defaults write com.apple.dock persistent-apps -array-add ' <dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Slack.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict> '
 fi 
 
@@ -28,6 +28,13 @@ fi
 
 # Disable Recent Apps
 defaults write com.apple.dock show-recents -bool false
+
+# Set Autohide on Dock
+defaults write com.apple.dock autohide -int 1
+
+# Set Dock Sizes
+defaults write com.apple.dock largesize -int 70
+defaults write com.apple.dock tilesize -int 35
 
 # Restart Dock
 killall Dock

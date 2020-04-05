@@ -51,9 +51,12 @@ if [ "$system_type" = "Darwin" ]; then
     pip3 install --upgrade pip setuptools wheel
   fi
 
-  #Set Key Repeats
+  # Set Key Repeats
   defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
   defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+
+  # Remove nagging iCloud notification
+  defaults delete com.apple.systempreferences AttentionPrefBundleIDs
 
   # Do brew cleanup
   brew cleanup
