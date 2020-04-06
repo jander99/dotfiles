@@ -8,3 +8,5 @@ jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
 jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-12.jdk/Contents/Home
 jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-13.jdk/Contents/Home
+
+jenv enable-plugin export
