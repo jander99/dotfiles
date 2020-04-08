@@ -4,7 +4,7 @@
 system_type=$(uname -s)
 
 # PS
-alias psa="psa aux"
+alias psa="ps aux"
 alias psef="ps -ef"
 
 # Human Friendly df and dh
