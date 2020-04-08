@@ -1,0 +1,16 @@
+## Aliases that make my work easier
+#  The aim is to make sure these are compatible with zsh and bash
+
+system_type=$(uname -s)
+
+# PS
+alias psa="psa aux"
+alias psef="ps -ef"
+
+# Human Friendly df and dh
+alias df="df -h"
+alias dh="dh -h"
+
+
+# Docker
+alias dps='docker ps --format "table {{.Names}}\t{{.Status}}"'
