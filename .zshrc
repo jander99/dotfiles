@@ -1,35 +1,27 @@
-# load zgen
-source "${HOME}/.zgen/zgen.zsh"
 
-system_type=$(uname -s)
 
-# if the init script doesn't exist
-if ! zgen saved; then
+# export ZSH_CACHE_DIR="$HOME/.cache"
 
-  # specify plugins here
-  zgen oh-my-zsh
-  zgen oh-my-zsh plugins/git
-  zgen oh-my-zsh plugins/sudo
-  zgen oh-my-zsh plugins/command-not-found
 
-  zgen load powerlevel9k/powerlevel9k powerlevel9k
-  zgen load zsh-users/zsh-autosuggestions
-  zgen load zsh-users/zsh-completions src
-  zgen load zsh-users/zsh-syntax-highlighting
+# setopt correct
+# setopt no_complete_aliases
 
-  zgen load zpm-zsh/autoenv
-  zgen load dannyzen/cf-zsh-autocomplete-plugin 
-  zgen load sbodiu-pivotal/fly-zsh-autocomplete-plugin
+# Completions for Brew
+# if type brew &>/dev/null; then
+#   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 
-  
-  if [ "$system_type" = "Darwin" ]; then
-    zgen load zsh-users/zsh-apple-touchbar
-  fi
+#   autoload -Uz compinit
+#   compinit
+# fi
 
-  # generate the init script from plugins above
-  zgen save
+
+#Source ZGen Directives
+
+if [ -f ~/.zgen-setup ]; then
+  source ~/.zgen-setup
 fi
 
-# jenv
+
+# Jenv configuration
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
