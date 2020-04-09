@@ -11,6 +11,8 @@ alias psef="ps -ef"
 alias df="df -h"
 alias dh="dh -h"
 
+# Things for fun
+alias bruh="brew"
 
 # Docker
 alias dps='docker ps --format "table {{.Names}}\t{{.Status}}"'

@@ -18,6 +18,7 @@ if ! zgen saved; then
   zgen load zsh-users/zsh-completions src
   zgen load zsh-users/zsh-syntax-highlighting
 
+  zgen load zpm-zsh/colors
   zgen load zpm-zsh/autoenv
   zgen load dannyzen/cf-zsh-autocomplete-plugin 
   zgen load sbodiu-pivotal/fly-zsh-autocomplete-plugin
