@@ -1,8 +1,9 @@
 #!/bin/sh 
 
 ## List things that I need to do
-# TODO: Configure jenv
-# TODO: 
+# TODO: Configure SSH Keys and GPG Storage
+# TODO: Download CF Vest Plugin from GHE 
+# TODO: global npmrc for artifactory
 
 # Initialize any submodules
 echo "Initializing submodules"
