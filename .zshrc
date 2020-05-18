@@ -1,4 +1,3 @@
-
 export TERM="xterm-256color"
 
 #Source ZGen Directives
@@ -17,19 +16,17 @@ fi
 # On Syno yadm is installed in $HOME/yadm/bin/yadm
 if [ -f $HOME/yadm/bin/yadm ]; then
   export PATH="$HOME/yadm/bin:$PATH"
-fi 
-
+fi
 
 # Jenv configuration
-if [ -f $HOME/.jenv/bin/jenv ]; then 
+if [ -f /usr/local/bin/jenv ]; then
   export PATH="$HOME/.jenv/bin:$PATH"
   eval "$(jenv init -)"
-fi 
+fi
 
 # Load zshrc.d files
 if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
-  for f in ~/.zshrc.d/*
-  do
+  for f in ~/.zshrc.d/*; do
     if [ -r "${f}" ]; then
       source "${f}"
     fi
