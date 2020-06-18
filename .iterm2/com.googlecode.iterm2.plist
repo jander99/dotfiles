@@ -63,8 +63,16 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>2560 768 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-2560 0 1278 1417 -2560 0 2560 1417 </string>
+	<string>0 23 2560 1394 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>0 723 1278 694 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>1282 723 1278 694 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>1282 0 1278 694 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -606,7 +614,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>1000</integer>
+			<integer>0</integer>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -867,7 +875,7 @@
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
-			<false/>
+			<true/>
 			<key>Use Bold Font</key>
 			<true/>
 			<key>Use Bright Bold</key>
@@ -889,26 +897,29 @@
 	<key>NoSyncAllAppVersions</key>
 	<array>
 		<string>3.3.9</string>
+		<string>3.3.11</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{-2560, 0}, {2560, 1440}}</string>
+		<string>{{0, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{-2334, 778}</string>
+		<string>{457, 910}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>D5B5844D-D8B4-48C2-9F50-6FF21AC34FEE</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>4</integer>
+	<integer>16</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
-	<real>607995467.13384998</real>
+	<real>608318990.45698202</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
 	<true/>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncRecordedVariables</key>
 	<dict>
 		<key>0</key>
@@ -1663,8 +1674,12 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-04-07T12:43:29Z</date>
+	<date>2020-06-12T12:33:04Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>SUUpdateGroupIdentifier</key>
+	<integer>960581683</integer>
+	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SoundForEsc</key>
 	<false/>
@@ -1675,6 +1690,6 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.3.9</string>
+	<string>3.3.11</string>
 </dict>
 </plist>

@@ -5,12 +5,14 @@ if [ -f ~/.zgen-setup ]; then
   source ~/.zgen-setup
 fi
 
-# Completions for Brew
+# Completions and sbin path for Brew
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 
   autoload -Uz compinit
   compinit
+
+  export PATH="/usr/local/sbin:$PATH"
 fi
 
 # On Syno yadm is installed in $HOME/yadm/bin/yadm
