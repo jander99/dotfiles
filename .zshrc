@@ -34,3 +34,4 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
     fi
   done
 fi
+export PATH="/usr/local/opt/libpq/bin:$PATH"

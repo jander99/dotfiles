@@ -16,3 +16,7 @@ alias bruh="brew"
 
 # Docker
 alias dps='docker ps --format "table {{.Names}}\t{{.Status}}"'
+
+# yq
+alias yqc="yq r -C"
+
