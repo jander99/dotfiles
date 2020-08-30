@@ -35,3 +35,8 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
   done
 fi
 export PATH="/usr/local/opt/libpq/bin:$PATH"
+
+# enable passphrase prompt for gpg
+export GPG_TTY=$(tty)
+
+#
