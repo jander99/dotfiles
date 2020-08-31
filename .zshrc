@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 export TERM="xterm-256color"
 
 #Source ZGen Directives
@@ -37,3 +39,6 @@ fi
 export PATH="/usr/local/opt/libpq/bin:$PATH"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
+
+# enable passphrase prompt for gpg
+export GPG_TTY=$(tty)

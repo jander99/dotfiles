@@ -13,3 +13,7 @@
 	required = true
 [pull]
 	rebase = false
+
+[commit]
+	gpgsign = true
+
