@@ -35,3 +35,5 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
   done
 fi
 export PATH="/usr/local/opt/libpq/bin:$PATH"
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
