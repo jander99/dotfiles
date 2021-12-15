@@ -3,3 +3,5 @@
 	email = jander99@gmail.com
 	signingkey = 8B76B3BC880523DA
 
+[commit]
+	gpgsign = true

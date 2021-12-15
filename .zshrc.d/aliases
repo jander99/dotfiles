@@ -20,3 +20,12 @@ alias dps='docker ps --format "table {{.Names}}\t{{.Status}}"'
 # yq
 alias yqc="yq r -C"
 
+# Cyberark PIMSSH
+alias pimqablk="ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $USER@sshblk11@ln2fe7.homedepot.com@pimssh-qa.homedepot.com"
+alias pimprblk="ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $USER@sshblk11@lp3034.homedepot.com@pimssh.homedepot.com"
+
+# Kubernetes
+alias k=kubectl
+
+# Terraform
+alias t=terraform

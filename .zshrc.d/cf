@@ -55,8 +55,8 @@ function cf-copy-env() {
     [[ -z "$1" ]] && return 1
     APP_GUID=$(cf app "${1}" --guid) || return 1
     JSON_ENV="$(cf curl /v2/apps/${APP_GUID}/env)"
-    export VCAP_SERVICES="$(jq '.system_env_json.VCAP_SERVICES' <<<" ${JSON_ENV}");"
-    export VCAP_APPLICATION="$(jq '.application_env_json.VCAP_APPLICATION' <<<"${JSON_ENV}");"
+    export VCAP_SERVICES="$(jq '.system_env_json.VCAP_SERVICES' <<<" ${JSON_ENV}")"
+    export VCAP_APPLICATION="$(jq '.application_env_json.VCAP_APPLICATION' <<<"${JSON_ENV}")"
     eval "$(
         jq -r '.environment_json as $env
       | $env
@@ -64,6 +64,10 @@ function cf-copy-env() {
       | map("export \(.)=" + ($env[.] | @json))
       | .[]' <<<"${JSON_ENV}"
     )"
+    # Unset the proxies, please
+    for e in $(env | egrep -i "^http" | awk -F "=" '{print $1}'); do 
+      unset $e; 
+    done
 }
 
 # This could be rewritten a little.
