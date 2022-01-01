@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# On Syno yadm is installed in $HOME/yadm/bin/yadm
+if [ -f "$HOME/yadm/bin/yadm" ]; then
+  export PATH="$HOME/yadm/bin:$PATH"
+fi

@@ -7,11 +7,6 @@ if [ -f ~/.zgen-setup ]; then
   source ~/.zgen-setup
 fi
 
-# On Syno yadm is installed in $HOME/yadm/bin/yadm
-if [ -f $HOME/yadm/bin/yadm ]; then
-  export PATH="$HOME/yadm/bin:$PATH"
-fi
-
 # Jenv configuration
 if [ -f /usr/local/bin/jenv ]; then
   export PATH="$HOME/.jenv/bin:$PATH"
