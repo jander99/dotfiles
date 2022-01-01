@@ -1,10 +1,18 @@
+#!/bin/sh
 
-PROJECTS_DIRECTORY=$HOME/workspace
+if [ -d "$HOME/workspace" ]
+then
+  PROJECTS_DIRECTORY=$HOME/workspace
+elif  [ -d "$HOME/workspaces" ]
+then
+  PROJECTS_DIRECTORY=$HOME/workspaces
+fi
+
 PROJECTS_DIRECTORY_DEPTH=2
 
 
-function project() {
-      fuzzy_find=$(find $PROJECTS_DIRECTORY -maxdepth $PROJECTS_DIRECTORY_DEPTH -type d | fzf -1 -q $1)
-      cd "$dir/$fuzzy_find"
+project() {
+      fuzzy_find=$(find "$PROJECTS_DIRECTORY" -maxdepth $PROJECTS_DIRECTORY_DEPTH -type d | fzf -1 -q "$1")
+      cd "$fuzzy_find" || exit
 }
 alias p="project"

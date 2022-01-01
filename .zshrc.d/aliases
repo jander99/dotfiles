@@ -1,7 +1,6 @@
+#!/bin/sh
 ## Aliases that make my work easier
 #  The aim is to make sure these are compatible with zsh and bash
-
-system_type=$(uname -s)
 
 # PS
 alias psa="ps aux"

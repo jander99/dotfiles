@@ -1,8 +1,15 @@
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+#!/bin/sh
 
-export GOPRIVATE=github.homedepot.com
+# Get YADM Local Class
+MACHINE_CLASS=$(yadm config local.class)
 
-# mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/bin
+if [ "$MACHINE_CLASS" = "Work" ]
+then
+    export GOPATH=$HOME/go
+    export GOROOT=/usr/local/opt/go/libexec
+    export PATH=$PATH:$GOPATH/bin
+    export PATH=$PATH:$GOROOT/bin
+
+    export GOPRIVATE=github.homedepot.com
+fi
+

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Completions and sbin path for Brew
+if command brew > /dev/null 2>&1
+then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+
+  export PATH="/usr/local/sbin:$PATH"
+fi

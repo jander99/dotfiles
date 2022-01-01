@@ -1,5 +1,10 @@
 #!/bin/sh
 
-eval $(ssh-agent -s) > /dev/null 2>&1
-ssh-add ~/.ssh/id_github.com > /dev/null 2>&1
+# Get YADM Local Class
+MACHINE_CLASS=$(yadm config local.class)
 
+if [ "$MACHINE_CLASS" = "Home" ]
+then
+    eval $(ssh-agent -s) > /dev/null 2>&1
+    ssh-add ~/.ssh/id_github.com > /dev/null 2>&1
+fi

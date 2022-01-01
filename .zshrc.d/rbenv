@@ -1,5 +1,6 @@
 #!/bin/sh
 
-
-
-eval "$(rbenv init -)"
+if command -v rbenv
+then
+    eval "$(rbenv init -)"
+fi

@@ -1,5 +1,10 @@
-export GCLOUD_PATH=/Users/jda0041/google-cloud-sdk/
-export CLOUDSDK_PYTHON=/usr/local/opt/python@3.8/bin/python3
+#!/bin/sh
 
-source "${GCLOUD_PATH}path.zsh.inc"
-source "${GCLOUD_PATH}completion.zsh.inc"
+if command -v gcloud > /dev/null 2>&1
+then
+    export GCLOUD_PATH=$HOME/google-cloud-sdk
+    export CLOUDSDK_PYTHON=$(which python3)
+
+    source "${GCLOUD_PATH}/path.zsh.inc"
+    source "${GCLOUD_PATH}/completion.zsh.inc"
+fi
