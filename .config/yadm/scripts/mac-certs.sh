@@ -5,7 +5,7 @@
 
 # Login as sudo if not already
 if [ $EUID != 0 ]; then
-    echo -e "\n*\n**\n***\n****\n*****\n******\n*******"
+    echo -e "n*n**n***n****n*****n******n*******"
     echo "******** You need sudo privileges to modify the jvm certs, please login!!"
     sudo "$0" "$@"
     exit $?
@@ -16,20 +16,32 @@ fi
 mitm_cert=$(mktemp)
 skope_cert=$(mktemp)
 skope_inter_cert=$(mktemp)
+thd_root_ca=$(mktemp)
+qa_thdretail_ca_01=$(mktemp)
+qa_thdretail_ca_02=$(mktemp)
 
-echo -e "\n=========================\n"
+echo -e "n=========================n"
 echo "finding McAfee cert"
 security find-certificate -c 'McAfee SSL Web Gateway' -p >"$mitm_cert" && echo "-done"
 echo "finding Netskope Root cert"
 security find-certificate -c 'caadmin.netskope.com' -p >"$skope_cert" && echo "-done"
 echo "finding Netskope Intermediate cert"
 security find-certificate -c 'ca.homedepot.goskope.com' -p >"$skope_inter_cert" && echo "-done"
+echo "Finding The Home Depot Root CA"
+security find-certificate -c 'The Home Depot Root CA' -p >"$thd_root_ca" && echo "-done"
+echo "Finding QATHDRetail-CA-01"
+security find-certificate -c 'QATHDRetail-CA-01' -p >"$qa_thdretail_ca_01" && echo "-done"
+echo "Finding QATHDRETAIL-CA-02"
+security find-certificate -c 'QATHDRETAIL-CA-01' -p >"$qa_thdretail_ca_02" && echo "-done"
 
 # call this with the directory as the argument
 function add_the_key {
     yes | keytool -keystore "$1/cacerts" -storepass changeit -importcert -file "$mitm_cert" -alias "MyMcAfee" 2> /dev/null | grep '^keytool'
     yes | keytool -keystore "$1/cacerts" -storepass changeit -importcert -file "$skope_cert" -alias "MyNetskope" 2> /dev/null | grep '^keytool'
     yes | keytool -keystore "$1/cacerts" -storepass changeit -importcert -file "$skope_inter_cert" -alias "MyInterNetskope" 2> /dev/null | grep '^keytool'
+    yes | keytool -keystore "$1/cacerts" -storepass changeit -importcert -file "$thd_root_ca" -alias "THDRootCAV3" 2> /dev/null | grep '^keytool'
+    yes | keytool -keystore "$1/cacerts" -storepass changeit -importcert -file "$qa_thdretail_ca_01" -alias "QA-THDRetail-CA-01" 2> /dev/null | grep '^keytool'
+    yes | keytool -keystore "$1/cacerts" -storepass changeit -importcert -file "$qa_thdretail_ca_02" -alias "QA-THDRetail-CA-02" 2> /dev/null | grep '^keytool'
 }
 
 # read -p "Press any key to continue... " -n1 -s
@@ -38,37 +50,40 @@ function add_the_key {
 # -----------------------------------------------------------------------------------------------
 # Start adding to cacerts files
 
-echo -e "\n=========================\n"
-echo -e "\t----------------------"
+echo -e "n=========================n"
+echo -e "t----------------------"
 echo "Adding certs to these IDE directories:"
 for intellij_dir in ~/Library/Caches/*/tasks/; do
-    echo -e "\t$intellij_dir"
+    echo -e "t$intellij_dir"
     add_the_key $intellij_dir
-    echo -e "\t----------------------"
+    echo -e "t----------------------"
 done
 
 jvm_found_dir=$(mktemp)
 # Should pull the path out of the output from finding the JVMs
-echo -e "\n=========================\n"
+echo -e "n=========================n"
 echo "Finding JVMs using a Mac command and installing certs there"
-/usr/libexec/java_home -V 2>&1 >/dev/null | sed -e "s/^[^\/]*//" >> $jvm_found_dir  # -e "s,Home,Home\/jre\/lib\/security\/," 
+/usr/libexec/java_home -V 2>&1 >/dev/null | sed -e "s/^[^/]*//" >> $jvm_found_dir  # -e "s,Home,Home/jre/lib/security/," 
 
-echo -e "\t----------------------"
+echo -e "t----------------------"
 while read -r line || [[ -n "$line" ]]; do
     if [ -z "${line}" ]; then
-        echo -e "\tEmpty line!!!"
+        echo -e "tEmpty line!!!"
     else
-        echo -e "\tText read from file: $line"
+        echo -e "tText read from file: $line"
         asdf=$( find $line -mindepth 1 -type d -regex '.*/lib/security/*' )
         # echo $asdf
         add_the_key $asdf
     fi
-    echo -e "\t----------------------"
+    echo -e "t----------------------"
 done < "$jvm_found_dir"
 
 rm "$mitm_cert"
 rm "$skope_cert"
 rm "$skope_inter_cert"
+rm "$thd_root_ca"
+rm "$qa_thdretail_ca_01"
+rm "$qa_thdretail_ca_02"
 rm "$jvm_found_dir"
 
 cat <<'EOF'

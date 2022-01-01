@@ -1,0 +1,10 @@
+
+PROJECTS_DIRECTORY=$HOME/workspace
+PROJECTS_DIRECTORY_DEPTH=2
+
+
+function project() {
+      fuzzy_find=$(find $PROJECTS_DIRECTORY -maxdepth $PROJECTS_DIRECTORY_DEPTH -type d | fzf -1 -q $1)
+      cd "$dir/$fuzzy_find"
+}
+alias p="project"

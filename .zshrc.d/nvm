@@ -1,6 +1,10 @@
-
+#!/bin/sh
 
 export NVM_DIR="$HOME/.nvm"
+
+if [ ! -d "$NVM_DIR" ]; then
+    mkdir -p "$NVM_DIR"
+fi
 
 if [ -e "$NVM_DIR/nvm.sh" ]; then
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

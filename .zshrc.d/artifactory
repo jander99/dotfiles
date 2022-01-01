@@ -1,0 +1,53 @@
+#!/bin/sh
+
+
+MAVEN_ARTIFACTORY_TOKEN_FILE=${HOME}/.maven_artifactory_token
+DOCKER_ARTIFACTORY_TOKEN_FILE=${HOME}/.docker_artifactory_token
+ART_MAVEN_TOKEN_GEN_URL=https://token-generator.artifactory.homedepot.com/api/maven/generateToken
+ART_DOCKER_TOKEN_GEN_URL=https://token-generator.artifactory.homedepot.com/api/docker/generateToken
+
+#Source Secrets
+if [ -f "$(pwd)/.secrets" ]; then 
+  . "$(pwd)/.secrets"
+fi 
+
+TOKEN_GOOD=0
+# Check if the token exists
+if [ ! -f "${MAVEN_ARTIFACTORY_TOKEN_FILE}" ]; then
+  TOKEN_GOOD=1
+else
+  ART_MAVEN_TOKEN=$(cat "${MAVEN_ARTIFACTORY_TOKEN_FILE}")
+  CURRENT_UNIX_TIMESTAMP=$(date +%s)
+  ART_MAVEN_JWT_EXP_TIMESTAMP="$(jwt decode "${ART_MAVEN_TOKEN}" -j | jq .payload.exp)"
+  if [ ${ART_MAVEN_JWT_EXP_TIMESTAMP} -lt ${CURRENT_UNIX_TIMESTAMP} ]; then
+    TOKEN_GOOD=1
+  fi
+fi 
+
+if [ ${TOKEN_GOOD} -eq 1 ]; then
+  ART_MAVEN_TOKEN=$(curl -s --request POST "${ART_MAVEN_TOKEN_GEN_URL}" -d "username=${LDAP_USER}" -d "password=${LDAP_PASS}" | jq -r .access_token)
+  echo "${ART_MAVEN_TOKEN}" > "${MAVEN_ARTIFACTORY_TOKEN_FILE}"
+fi
+
+TOKEN_GOOD=0
+# Check if the token exists
+if [ ! -f "${DOCKER_ARTIFACTORY_TOKEN_FILE}" ]; then
+  TOKEN_GOOD=1
+else
+  ART_DOCKER_TOKEN=$(cat "${DOCKER_ARTIFACTORY_TOKEN_FILE}")
+  CURRENT_UNIX_TIMESTAMP=$(date +%s)
+  ART_DOCKER_JWT_EXP_TIMESTAMP="$(jwt decode "${ART_MAVEN_TOKEN}" -j | jq .payload.exp)"
+  if [ ${ART_DOCKER_JWT_EXP_TIMESTAMP} -lt ${CURRENT_UNIX_TIMESTAMP} ]; then
+    TOKEN_GOOD=1
+  fi
+fi 
+
+if [ ${TOKEN_GOOD} -eq 1 ]; then
+  ART_DOCKER_TOKEN=$(curl -s --request POST "${ART_DOCKER_TOKEN_GEN_URL}" -d "username=${LDAP_USER}" -d "password=${LDAP_PASS}" | jq -r .access_token)
+  echo "${ART_DOCKER_TOKEN}" > "${DOCKER_ARTIFACTORY_TOKEN_FILE}"
+fi
+
+export ART_LOGIN_USR=${LDAP_USER}
+export ART_LOGIN_PSW=${LDAP_PASS}
+export ART_TOKEN=${ART_MAVEN_TOKEN}
+export ART_DOCKER_TOKEN=${ART_DOCKER_TOKEN}
