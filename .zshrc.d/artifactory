@@ -5,16 +5,20 @@ MACHINE_CLASS=$(yadm config local.class)
 
 if [ "$MACHINE_CLASS" = "Work" ]
 then
-  MAVEN_ARTIFACTORY_TOKEN_FILE=${HOME}/.maven_artifactory_token
-  DOCKER_ARTIFACTORY_TOKEN_FILE=${HOME}/.docker_artifactory_token
-  ART_MAVEN_TOKEN_GEN_URL=https://token-generator.artifactory.homedepot.com/api/maven/generateToken
-  ART_DOCKER_TOKEN_GEN_URL=https://token-generator.artifactory.homedepot.com/api/docker/generateToken
 
   #Source Secrets
-  if [ -f "$(pwd)/.secrets" ]; then 
-    . "$(pwd)/.secrets"
+  if [ -f "${HOME}/.secrets" ]; then 
+    # shellcheck source=/dev/null
+    . "${HOME}/.secrets"
+  else
+    echo "Secrets not found. Cannot continue."
+    exit 1
   fi 
 
+  # Maven Token
+  MAVEN_ARTIFACTORY_TOKEN_FILE=${HOME}/.maven_artifactory_token
+  ART_MAVEN_TOKEN_GEN_URL=https://token-generator.artifactory.homedepot.com/api/maven/generateToken
+  
   TOKEN_GOOD=0
   # Check if the token exists
   if [ ! -f "${MAVEN_ARTIFACTORY_TOKEN_FILE}" ]; then
@@ -22,8 +26,8 @@ then
   else
     ART_MAVEN_TOKEN=$(cat "${MAVEN_ARTIFACTORY_TOKEN_FILE}")
     CURRENT_UNIX_TIMESTAMP=$(date +%s)
-    ART_MAVEN_JWT_EXP_TIMESTAMP="$(jwt decode "${ART_MAVEN_TOKEN}" -j | jq .payload.exp)"
-    if [ ${ART_MAVEN_JWT_EXP_TIMESTAMP} -lt ${CURRENT_UNIX_TIMESTAMP} ]; then
+    ART_MAVEN_JWT_EXP_TIMESTAMP="$(jwt decode "${ART_MAVEN_TOKEN}" -j | jq -r .payload.exp)"
+    if [ $? -ne 0 ] || [ "${ART_MAVEN_JWT_EXP_TIMESTAMP}" -lt "${CURRENT_UNIX_TIMESTAMP}" ]; then
       TOKEN_GOOD=1
     fi
   fi 
@@ -33,6 +37,11 @@ then
     echo "${ART_MAVEN_TOKEN}" > "${MAVEN_ARTIFACTORY_TOKEN_FILE}"
   fi
 
+  
+  # Docker Token
+  DOCKER_ARTIFACTORY_TOKEN_FILE=${HOME}/.docker_artifactory_token
+  ART_DOCKER_TOKEN_GEN_URL=https://token-generator.artifactory.homedepot.com/api/docker/generateToken
+
   TOKEN_GOOD=0
   # Check if the token exists
   if [ ! -f "${DOCKER_ARTIFACTORY_TOKEN_FILE}" ]; then
@@ -40,8 +49,8 @@ then
   else
     ART_DOCKER_TOKEN=$(cat "${DOCKER_ARTIFACTORY_TOKEN_FILE}")
     CURRENT_UNIX_TIMESTAMP=$(date +%s)
-    ART_DOCKER_JWT_EXP_TIMESTAMP="$(jwt decode "${ART_MAVEN_TOKEN}" -j | jq .payload.exp)"
-    if [ ${ART_DOCKER_JWT_EXP_TIMESTAMP} -lt ${CURRENT_UNIX_TIMESTAMP} ]; then
+    ART_DOCKER_JWT_EXP_TIMESTAMP="$(jwt decode "${ART_DOCKER_TOKEN}" -j | jq .payload.exp)"
+    if [ "${ART_DOCKER_JWT_EXP_TIMESTAMP}" -lt "${CURRENT_UNIX_TIMESTAMP}" ]; then
       TOKEN_GOOD=1
     fi
   fi 
