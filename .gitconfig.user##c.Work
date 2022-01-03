@@ -1,6 +1,6 @@
 [user]
 	name = Jeff Anderson
-	email = jeffrey_d_anderson@homedepot.com
+	email = jeff@homedepot.com
 [url "git@github.homedepot.com:"]
 	insteadOf = https://github.homedepot.com/
 
