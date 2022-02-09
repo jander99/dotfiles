@@ -1,0 +1,6 @@
+[user]
+	name = Jeff Anderson
+	email = jander99@gmail.com
+
+[core]
+    sshCommand = "ssh -i ~/.ssh/id_ed25519_github.com -o IdentitiesOnly=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
