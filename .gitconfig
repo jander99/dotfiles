@@ -8,9 +8,10 @@
 	unfuck = reset --hard HEAD
 [include]
 	path = ~/.gitconfig.os
+	path = ~/.gitconfig.user
 
 [includeIf "gitdir:~/workspace/"]
-    path = ~/.gitconfig.user
+    path = ~/.gitconfig.user.ghec
 
 [includeIf "gitdir:~/workspace/personal/"]
     path = ~/.gitconfig.user.github

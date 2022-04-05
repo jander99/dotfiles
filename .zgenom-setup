@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+
+# load zgen
+source "${HOME}/.zgenom/zgenom.zsh"
+
+# Set the System Type 
+system_type=$(uname -s)
+
+# Check for plugin and zgenom updates every 7 days
+# This does not increase the startup time.
+zgenom autoupdate
+
+# if the init script doesn't exist
+if ! zgenom saved; then
+
+  # specify plugins here
+  zgenom ohmyzsh
+  zgenom ohmyzsh plugins/git
+  zgenom ohmyzsh plugins/sudo
+  zgenom ohmyzsh plugins/command-not-found
+  zgenom ohmyzsh --completion plugins/docker-compose
+  [[ "$(uname -s)" = Darwin ]] && zgenom ohmyzsh plugins/macos
+
+  zgenom load romkatv/powerlevel10k powerlevel10k
+  zgenom load zsh-users/zsh-autosuggestions
+  zgenom load zsh-users/zsh-completions src
+  zgenom load zsh-users/zsh-syntax-highlighting
+  zgenom load zsh-users/zsh-history-substring-search
+
+  zgenom load zpm-zsh/colors
+  zgenom load zpm-zsh/autoenv
+  zgenom load dannyzen/cf-zsh-autocomplete-plugin 
+  zgenom load sbodiu-pivotal/fly-zsh-autocomplete-plugin
+
+  [[ "$system_type" = "Darwin" ]] && zgenom load zsh-users/zsh-apple-touchbar
+
+  # generate the init script from plugins above
+  zgenom save
+
+  zgenom compile "$HOME/.zshrc"
+  zgenom compile "$HOME/.zshrc.d/"
+fi
