@@ -1,3 +1,3 @@
-[submodule "~/.zgen"]
-	path = ~/.zgen
-	url = https://github.com/tarjoilija/zgen.git
+[submodule "~/.zgenom"]
+	path = ~/.zgenom
+	url = https://github.com/jandamm/zgenom.git

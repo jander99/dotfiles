@@ -16,6 +16,9 @@
 [includeIf "gitdir:~/workspace/personal/"]
     path = ~/.gitconfig.user.github
 
+[includeIf "gitdir:~/.local/share/yadm/repo.git"]
+    path = ~/.gitconfig.user.github
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
