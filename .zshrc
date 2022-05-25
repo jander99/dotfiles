@@ -1,5 +1,12 @@
 #!/usr/bin/env zsh
 
+export TERM="xterm-256color"
+
+#Source ZGenOM Directives
+if [ -f ~/.zgenom-setup ]; then
+  source ~/.zgenom-setup
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -7,12 +14,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export TERM="xterm-256color"
-
-#Source ZGenOM Directives
-if [ -f ~/.zgenom-setup ]; then
-  source ~/.zgenom-setup
-fi
 
 # Jenv configuration
 if [ -f /usr/local/bin/jenv ]; then
