@@ -50,13 +50,13 @@ then
     ART_DOCKER_TOKEN=$(cat "${DOCKER_ARTIFACTORY_TOKEN_FILE}")
     CURRENT_UNIX_TIMESTAMP=$(date +%s)
     ART_DOCKER_JWT_EXP_TIMESTAMP="$(jwt decode "${ART_DOCKER_TOKEN}" -j | jq .payload.exp)"
-    if [ "${ART_DOCKER_JWT_EXP_TIMESTAMP}" -lt "${CURRENT_UNIX_TIMESTAMP}" ]; then
+    if [ $? -ne 0 ] || [ "${ART_DOCKER_JWT_EXP_TIMESTAMP}" -lt "${CURRENT_UNIX_TIMESTAMP}" ]; then
       TOKEN_GOOD=1
     fi
   fi 
 
   if [ ${TOKEN_GOOD} -eq 1 ]; then
-    ART_DOCKER_TOKEN=$(curl -s --request POST "${ART_DOCKER_TOKEN_GEN_URL}" -d "username=${LDAP_USER}" -d "password=${LDAP_PASS}" | jq -r .access_token)
+    ART_DOCKER_TOKEN=$(curl -s --request POST "${ART_DOCKER_TOKEN_GEN_URL}" --data-urlencode "username=${LDAP_USER}" --data-urlencode "password=${LDAP_PASS}" | jq -r .access_token)
     echo "${ART_DOCKER_TOKEN}" > "${DOCKER_ARTIFACTORY_TOKEN_FILE}"
   fi
 

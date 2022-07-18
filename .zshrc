@@ -52,6 +52,8 @@ export GCLOUD_PATH=$HOME/google-cloud-sdk
 export CLOUDSDK_PYTHON=$(which python3)
 source "${GCLOUD_PATH}"/path.zsh.inc
 source "${GCLOUD_PATH}"/completion.zsh.inc
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
