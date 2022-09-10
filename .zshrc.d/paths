@@ -1,0 +1,15 @@
+#!/bin/sh
+
+
+export PATH="/usr/local/bin:$PATH"
+
+if [ -d "/usr/local/opt/libpq/bin" ]
+then
+  export PATH="/usr/local/opt/libpq/bin:$PATH"
+fi
+
+if [ -d "/usr/local/opt/openssl@1.1/bin" ]
+then
+  export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+fi
+

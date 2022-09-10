@@ -14,10 +14,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Jenv configuration
-if [ -f /usr/local/bin/jenv ]; then
-  export PATH="$HOME/.jenv/bin:$PATH"
-  eval "$(jenv init -)"
+# On Syno yadm is installed in $HOME/yadm/bin/yadm
+# This needs to load near the top to allow other references to function
+if [ -f "$HOME/yadm/bin/yadm" ]; then
+  export PATH="$HOME/yadm/bin:$PATH"
 fi
 
 # Load zshrc.d files
@@ -29,22 +29,8 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
   done
 fi
 
-if [ -d "/usr/local/opt/libpq/bin" ]
-then
-  export PATH="/usr/local/opt/libpq/bin:$PATH"
-fi
-
-if [ -d "/usr/local/opt/openssl@1.1/bin" ]
-then
-  export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-fi
-
-# Python hacks
-export PATH="/usr/local/bin:$PATH"
-
 # enable passphrase prompt for gpg
 export GPG_TTY=$(tty)
-
 
 # GCloud things (temporary)
 
