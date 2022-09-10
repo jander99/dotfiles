@@ -10,7 +10,13 @@
 	path = ~/.gitconfig.os
 	path = ~/.gitconfig.user
 
+[includeIf "gitdir:~/workspace/"]
+    path = ~/.gitconfig.user.ghec
+
 [includeIf "gitdir:~/workspace/personal/"]
+    path = ~/.gitconfig.user.github
+
+[includeIf "gitdir:~/.local/share/yadm/repo.git"]
     path = ~/.gitconfig.user.github
 
 [filter "lfs"]
@@ -20,3 +26,7 @@
 	required = true
 [pull]
 	rebase = false
+# [commit]
+# 	gpgsign = true
+# [gpg]
+# 	format = ssh

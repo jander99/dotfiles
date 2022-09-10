@@ -1,5 +1,0 @@
-#!/bin/sh
-
-export PATH="$HOME/.local/bin:$PATH"
-# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-# source /usr/local/bin/virtualenvwrapper.sh

@@ -2,9 +2,16 @@
 
 export TERM="xterm-256color"
 
-#Source ZGen Directives
-if [ -f ~/.zgen-setup ]; then
-  source ~/.zgen-setup
+#Source ZGenOM Directives
+if [ -f ~/.zgenom-setup ]; then
+  source ~/.zgenom-setup
+fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Jenv configuration
@@ -46,6 +53,7 @@ if [ -d "$HOME/google-cloud-sdk" ]; then
   export CLOUDSDK_PYTHON=$(which python3)
   source "${GCLOUD_PATH}"/path.zsh.inc
   source "${GCLOUD_PATH}"/completion.zsh.inc
+  export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 fi 
 
 autoload -U +X bashcompinit && bashcompinit
@@ -54,7 +62,8 @@ if [ -d /usr/local/bin/terraform ]; then
   complete -o nospace -C /usr/local/bin/terraform terraform
 fi
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
-
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

@@ -1,7 +1,4 @@
 [user]
 	name = Jeff Anderson
 	email = jander99@gmail.com
-	signingkey = 8B76B3BC880523DA
-
-#[commit]
-#	gpgsign = true
+	signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgwVjxjZG8A/E4ywjtlAOQbvpBRHROGzxQ1Rxotzu3j"

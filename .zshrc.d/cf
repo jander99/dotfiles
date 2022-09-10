@@ -105,4 +105,16 @@ if command -v cf >/dev/null 2>&1; then
         fi
     }
 
+    function cf6() {
+        brew unlink cf-cli@6 && brew unlink cf-cli@7 && brew unlink cf-cli@8 && brew link cf-cli@6
+    }
+
+    function cf7() {
+        brew unlink cf-cli@6 && brew unlink cf-cli@7 && brew unlink cf-cli@8 && brew link cf-cli@7
+    }
+
+    function cf8() {
+        brew unlink cf-cli@6 && brew unlink cf-cli@7 && brew unlink cf-cli@8 && brew link cf-cli@8
+    }
+
 fi
