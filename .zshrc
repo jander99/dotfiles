@@ -40,13 +40,19 @@ export GPG_TTY=$(tty)
 
 
 # GCloud things (temporary)
-export GCLOUD_PATH=$HOME/google-cloud-sdk
-export CLOUDSDK_PYTHON=$(which python3)
-source "${GCLOUD_PATH}"/path.zsh.inc
-source "${GCLOUD_PATH}"/completion.zsh.inc
+
+if [ -d "$HOME/google-cloud-sdk" ]; then
+  export GCLOUD_PATH=$HOME/google-cloud-sdk
+  export CLOUDSDK_PYTHON=$(which python3)
+  source "${GCLOUD_PATH}"/path.zsh.inc
+  source "${GCLOUD_PATH}"/completion.zsh.inc
+fi 
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+
+if [ -d /usr/local/bin/terraform ]; then
+  complete -o nospace -C /usr/local/bin/terraform terraform
+fi
 
 
 

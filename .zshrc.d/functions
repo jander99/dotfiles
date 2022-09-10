@@ -12,7 +12,7 @@ PROJECTS_DIRECTORY_DEPTH=2
 
 
 project() {
-      fuzzy_find=$(find "$PROJECTS_DIRECTORY" -maxdepth $PROJECTS_DIRECTORY_DEPTH -type d | fzf -1 -q "$1")
+      fuzzy_find=$(find -L "$PROJECTS_DIRECTORY" -maxdepth $PROJECTS_DIRECTORY_DEPTH -type d | fzf -1 -q "$1")
       cd "$fuzzy_find" || exit
 }
 alias p="project"
