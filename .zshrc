@@ -14,7 +14,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
 # Jenv configuration
 if [ -f /usr/local/bin/jenv ]; then
   export PATH="$HOME/.jenv/bin:$PATH"
@@ -48,15 +47,20 @@ export GPG_TTY=$(tty)
 
 
 # GCloud things (temporary)
-export GCLOUD_PATH=$HOME/google-cloud-sdk
-export CLOUDSDK_PYTHON=$(which python3)
-source "${GCLOUD_PATH}"/path.zsh.inc
-source "${GCLOUD_PATH}"/completion.zsh.inc
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
+if [ -d "$HOME/google-cloud-sdk" ]; then
+  export GCLOUD_PATH=$HOME/google-cloud-sdk
+  export CLOUDSDK_PYTHON=$(which python3)
+  source "${GCLOUD_PATH}"/path.zsh.inc
+  source "${GCLOUD_PATH}"/completion.zsh.inc
+  export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+fi 
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+
+if [ -d /usr/local/bin/terraform ]; then
+  complete -o nospace -C /usr/local/bin/terraform terraform
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
