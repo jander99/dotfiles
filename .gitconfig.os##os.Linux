@@ -1,3 +1,6 @@
 [credential]
   helper = store
 
+[core]
+    sshCommand = "ssh -i ~/.ssh/id_ed25519_github.com -o IdentitiesOnly=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+
