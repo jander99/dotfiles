@@ -1,8 +1,8 @@
 [alias]
 	st = status
 	co = checkout
-	po = push origin
-	poh = push origin HEAD
+	po = push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
+	poh = push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	fucked = !git add . && git commit -m "$1" && git push origin head
 	unfuck = reset --hard HEAD
@@ -30,3 +30,5 @@
 # 	gpgsign = true
 # [gpg]
 # 	format = ssh
+[fetch]
+	prune = true
