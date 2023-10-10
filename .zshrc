@@ -33,19 +33,18 @@ fi
 export GPG_TTY=$(tty)
 
 # GCloud things (temporary)
-
-if [ -d "$HOME/google-cloud-sdk" ]; then
-  export GCLOUD_PATH=$HOME/google-cloud-sdk
-  export CLOUDSDK_PYTHON=$(which python3)
-  source "${GCLOUD_PATH}"/path.zsh.inc
-  source "${GCLOUD_PATH}"/completion.zsh.inc
+if [ command -v gcloud > /dev/null 2>&1 ]; then
+  source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+  source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
   export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+  export CLOUDSDK_PYTHON=$(which python3)
+
 fi 
 
 autoload -U +X bashcompinit && bashcompinit
 
-if [ -d /usr/local/bin/terraform ]; then
-  complete -o nospace -C /usr/local/bin/terraform terraform
+if [ command -v terraform > /dev/null 2>&1 ]; then
+  complete -o nospace -C $(command -v terraform) terraform
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -53,3 +52,5 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+test -s "${HOME}/.config/certs/caadmin.netskope.com.pem" &&
+  export NODE_EXTRA_CA_CERTS="${HOME}/.config/certs/caadmin.netskope.com.pem"
