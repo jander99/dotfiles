@@ -16,6 +16,9 @@
 [includeIf "gitdir:~/workspace/personal/"]
     path = ~/.gitconfig.user.github
 
+[includeIf "gitdir:~/workspaces/"]
+    path = ~/.gitconfig.user.github
+
 [includeIf "gitdir:~/.local/share/yadm/repo.git"]
     path = ~/.gitconfig.user.github
 
@@ -32,3 +35,5 @@
 # 	format = ssh
 [fetch]
 	prune = true
+[init]
+    defaultBranch = main
