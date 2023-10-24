@@ -1,6 +1,6 @@
 [user]
 	name = Jeff Anderson
-	email = jeff@homedepot.com
+	email = jeffrey_d_anderson@homedepot.com
 	signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILc2mmGVuAuRex6oGMjWCgEmR/dlJWKWNvs0aTJV+dXK"
 [core]
     sshCommand = "ssh -i ~/.ssh/id_ed25519_ghec -o IdentitiesOnly=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
