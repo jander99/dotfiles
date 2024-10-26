@@ -13,3 +13,8 @@ then
   export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 fi
 
+if [ -d "$HOME/.cargo/bin" ]
+then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
