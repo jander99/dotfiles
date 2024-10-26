@@ -1,6 +1,6 @@
 [user]
 	name = Jeff Anderson
-	email = jeff@homedepot.com
+	email = jeffrey_d_anderson@homedepot.com
 	signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILc2mmGVuAuRex6oGMjWCgEmR/dlJWKWNvs0aTJV+dXK"
 [url "git@github.homedepot.com:"]
 	insteadOf = https://github.homedepot.com/
