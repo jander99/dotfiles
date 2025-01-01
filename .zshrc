@@ -60,3 +60,5 @@ export NVM_DIR="$HOME/.nvm"
 # Really a work macbook thing, should probably make a profile. 
 test -s "${HOME}/.config/certs/caadmin.netskope.com.pem" &&
   export NODE_EXTRA_CA_CERTS="${HOME}/.config/certs/caadmin.netskope.com.pem"
+
+. "$HOME/.local/bin/env"
