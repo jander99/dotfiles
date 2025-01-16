@@ -52,5 +52,16 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-test -s "${HOME}/.config/certs/caadmin.netskope.com.pem" &&
-  export NODE_EXTRA_CA_CERTS="${HOME}/.config/certs/caadmin.netskope.com.pem"
+export NODE_EXTRA_CA_CERTS=/usr/local/munki/thd_certs.pem
+export NODE_TLS_REJECT_UNAUTHORIZED='0'
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/JDA0041/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# speedscale env vars
+export SPEEDSCALE_HOME=/Users/JDA0041/.speedscale
+export PATH=$PATH:$SPEEDSCALE_HOME
