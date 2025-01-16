@@ -65,3 +65,13 @@ export PATH="/Users/JDA0041/.rd/bin:$PATH"
 # speedscale env vars
 export SPEEDSCALE_HOME=/Users/JDA0041/.speedscale
 export PATH=$PATH:$SPEEDSCALE_HOME
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Really a work macbook thing, should probably make a profile. 
+test -s "${HOME}/.config/certs/caadmin.netskope.com.pem" &&
+  export NODE_EXTRA_CA_CERTS="${HOME}/.config/certs/caadmin.netskope.com.pem"
+
+. "$HOME/.local/bin/env"

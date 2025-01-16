@@ -12,3 +12,8 @@ then
   export PATH="/opt/homebrew/Cellar/openssl@3/3.1.0/bin:$PATH"
 fi
 
+if [ -d "$HOME/.cargo/bin" ]
+then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
